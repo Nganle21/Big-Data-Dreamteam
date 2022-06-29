@@ -32,7 +32,7 @@ file_path = "filtered_track_df.csv"
 content = read_file(bucket_name, file_path)
 
 temp = pd.read_csv('gs://big-data-lyrician/filtered_track_df.csv', encoding='utf-8')
-    print (temp.head())
+st.write(temp.head())
 
 @st.cache(allow_output_mutation=True)
 def load_data():
