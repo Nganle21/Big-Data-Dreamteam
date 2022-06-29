@@ -119,8 +119,11 @@ def page():
 
     tracks_per_page = 6
     #test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
-    audio_feats = test_feat
-    st.write(test_feat)
+    audio_feats = []
+    for i in options:
+        audio_feats.append(i)
+
+    st.write(audio_feats)
 
     def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
         genre = genre.lower()
