@@ -5,6 +5,7 @@ from google.oauth2 import service_account
 from google.cloud import storage
 
 import pandas as pd
+import numpy as np
 from sklearn.neighbors import NearestNeighbors
 import plotly.express as px
 import streamlit.components.v1 as components
