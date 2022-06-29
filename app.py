@@ -13,7 +13,7 @@ import streamlit.components.v1 as components
 st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random", initial_sidebar_state="expanded")
 
 #Create sidebar
-st.sidebar.titel("Navigation")
+st.sidebar.title("Navigation")
 
 # Create API client.
 credentials = service_account.Credentials.from_service_account_info(
