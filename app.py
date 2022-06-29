@@ -61,7 +61,7 @@ def page():
                 "",
                 genre_names, index=genre_names.index("Hip Hop"))
         with col1:
-            st.markdown("***Specify the customized song features:***")
+            st.markdown("***Choose the year range:***")
             start_year, end_year = st.slider(
                 'Select the year range',
                 1990, 2019, (2006, 2008)
@@ -70,8 +70,9 @@ def page():
             st.markdown("***Specify relevant features in this dropdown box:***")
             options = st.multiselect('Relevant features:', options=['acousticness', 'danceability', 'energy','instrumentalness','valence','tempo','liveness','loudness','popularity','speechiness'],
                                         default=['acousticness', 'danceability', 'energy','instrumentalness', 'valence', 'tempo'])
-            test_feat=[]
 
+            st.markdown("***Specify the customized song features:***")        
+            test_feat=[]
             if "acousticness" in options:
                             acousticness = st.slider(
                             'Acousticness',
@@ -179,7 +180,7 @@ def page():
                             track,
                             height=400,
                         )
-                        with st.expander("See more details"):
+                        with st.expander("Feature radar charts"):
                             df = pd.DataFrame(dict(
                             r=audio,
                             theta=audio_feats))
@@ -193,7 +194,7 @@ def page():
                             track,
                             height=400,
                         )
-                        with st.expander("See more details"):
+                        with st.expander("Feature radar charts"):
                             df = pd.DataFrame(dict(
                                 r=audio,
                                 theta=audio_feats))
