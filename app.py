@@ -9,30 +9,23 @@ credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"]
 )
 client = storage.Client(credentials=credentials)
-st.write('test')
 
 # Retrieve file contents.
 # Uses st.experimental_memo to only rerun when the query changes or after 10 min.
-#@st.experimental_memo(ttl=600)
-#def read_file(bucket_name, file_path):
-#    bucket = client.bucket(bucket_name)
-#    content = bucket.blob(file_path).download_as_string().decode("utf-8")
-#    return content
+@st.experimental_memo(ttl=600)
+def read_file(bucket_name, file_path):
+    bucket = client.bucket(bucket_name)
+    content = bucket.blob(file_path).download_as_string().decode("utf-8")
+    return content
 
-#bucket_name = "streamlit-bucket"
-#file_path = "myfile.csv"
+bucket_name = “big-data-lyrician”
+file_path = “filtered_track_df.csv”
 
-#content = read_file(bucket_name, file_path)
-
-# Print results.
-#for line in content.strip().split("\n"):
-#    name, pet = line.split(",")
-#    st.write(f"{name} has a :{pet}:")
+content = read_file(bucket_name, file_path)
 
 
 #Create Streamlit app page
-st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random",
-initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random", initial_sidebar_state="collapsed")
 
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
