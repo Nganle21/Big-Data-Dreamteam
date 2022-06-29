@@ -41,7 +41,7 @@ def load_data():
     return exploded_track_df
 
 genre_names = ['Dance Pop', 'Electronic', 'Electropop', 'Hip Hop', 'Jazz', 'K-pop', 'Latin', 'Pop', 'Pop Rap', 'R&B', 'Rock']
-audio_feats = ["acousticness", "danceability", "energy", "instrumentalness", "valence", "tempo"]
+#audio_feats = ["acousticness", "danceability", "energy", "instrumentalness", "valence", "tempo"]
 
 exploded_track_df = load_data()
 
@@ -133,6 +133,7 @@ def page():
 
     tracks_per_page = 6
     #test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
+    audio_feats = test_feat
     st.write(test_feat)
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
 
