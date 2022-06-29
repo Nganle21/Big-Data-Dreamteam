@@ -8,6 +8,7 @@ import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 import plotly.express as px
 import streamlit.components.v1 as components
+from tensorflow import keras
 
 #Create Streamlit app page
 st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random", initial_sidebar_state="expanded")
@@ -208,27 +209,56 @@ def page():
 #page()
 
 def lyr_gen():
-    import numpy as np
-    import time
-    progress_bar = st.sidebar.progress(0)
-    status_text = st.sidebar.empty()
-    last_rows = np.random.randn(1, 1)
-    chart = st.line_chart(last_rows)
 
-    for i in range(1, 101):
-        new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-        status_text.text("%i%% Complete" % i)
-        chart.add_rows(new_rows)
-        progress_bar.progress(i)
-        last_rows = new_rows
-        time.sleep(0.05)
+    def generate_text(model, start_string,t):
+    # Evaluation step (generating text using the learned model)
 
-    progress_bar.empty()
+        # Number of characters to generate
+        num_generate = 500
 
-    # Streamlit widgets automatically run the script from top to bottom. Since
-    # this button is not connected to any other logic, it just causes a plain
-    # rerun.
-    st.button("Re-run")
+        # Converting our start string to numbers (vectorizing)
+        input_eval = [char2idx[s] for s in start_string]
+        input_eval = tf.expand_dims(input_eval, 0)
+
+        # Empty string to store our results
+        text_generated = []
+
+        # Low temperature results in more predictable text.
+        # Higher temperature results in more surprising text.
+        # Experiment to find the best setting.
+        temperature = t
+
+        # Here batch size == 1
+        model.reset_states()
+        for i in range(num_generate):
+            predictions = model(input_eval)
+            # remove the batch dimension
+            predictions = tf.squeeze(predictions, 0)
+
+            # using a categorical distribution to predict the character returned by the model
+            predictions = predictions / temperature
+            predicted_id = tf.random.categorical(predictions, num_samples=1)[-1,0].numpy()
+
+            # Pass the predicted character as the next input to the model
+            # along with the previous hidden state
+            input_eval = tf.expand_dims([predicted_id], 0)
+
+            text_generated.append(idx2char[predicted_id])
+
+        return (start_string + ''.join(text_generated))
+
+    
+    a = keras.models.load_model("./Trained_models/electronic_model.h5")
+    st.write(generate_text(a, start_string=u"i just called to say",t=0.3))
+
+    def My_song(song):
+        img = Image.open("../input/image-for-notebook/Pink and White Geometric Marketing Presentation (1).png")
+        Text_on_image = ImageDraw.Draw(img)
+        myFont = ImageFont.truetype("../input/font-style/DancingScript-VariableFont_wght.ttf", 45)
+        Text_on_image.text((620,90), song, font=myFont, fill =(255, 255, 255))
+        return img    
+    #Having a look at the first 500 charachters of a random song lyrics
+    My_song(data.Lyrics[42][:500])
 
 
 #Create sidebar

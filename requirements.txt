@@ -104,3 +104,4 @@ plotly
 sklearn
 fsspec
 gcsfs
+tensorflow
