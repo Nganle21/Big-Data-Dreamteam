@@ -75,15 +75,16 @@ def page():
                 "",
                 genre_names, index=genre_names.index("Hip Hop"))
         with col1:
-            st.markdown("***Specify relevant features in this dropdown box:***")
-            options = st.multiselect('Relevant features:', options=['acousticness', 'danceability', 'energy','instrumentalness','valence','tempo','liveness','loudness','popularity','speechiness'],
-                                        default=['acousticness', 'danceability', 'energy','instrumentalness', 'valence', 'tempo'])
-
             st.markdown("***Specify the customized song features:***")
             start_year, end_year = st.slider(
                 'Select the year range',
                 1990, 2019, (2006, 2008)
             )
+
+            st.markdown("***Specify relevant features in this dropdown box:***")
+            options = st.multiselect('Relevant features:', options=['acousticness', 'danceability', 'energy','instrumentalness','valence','tempo','liveness','loudness','popularity','speechiness'],
+                                        default=['acousticness', 'danceability', 'energy','instrumentalness', 'valence', 'tempo'])
+
             if "acousticness" in options:
                             acousticness = st.slider(
                             'Acousticness',
@@ -111,24 +112,26 @@ def page():
             if "liveness" in options:
                             liveness = st.slider(
                                 'Liveness',
-                                0.0, 244.04, 118.0)
+                                0.0, 1, 0.4)
             if "loudness" in options:
                             loudness = st.slider(
                                 'Loudness',
-                                0.0, 244.04, 118.0)
+                                -60.0, -30.0, -0.33)
             if "popularity" in options:
                             popularity = st.slider(
                                 'Popularity',
-                                0.0, 244.04, 118.0)
+                                0.0, 97.0, 48.0)
             if "speechiness" in options:
                             speechiness = st.slider(
                                 'Speechiness',
-                                0.0, 244.04, 118.0)
+                                0.0, 0.941, 0.44)
             
 
     tracks_per_page = 6
-    test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
-    #test_feat = options
+    #test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
+    test_feat = []
+    for i in options:
+        test_feat.append(i)
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
 
     tracks = []
