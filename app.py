@@ -77,7 +77,7 @@ def page():
         with col1:
             st.markdown("***Specify relevant features in this dropdown box:***")
             options = st.multiselect('Relevant features:', options=['acousticness', 'danceability', 'energy','instrumentalness','valence','tempo','liveness','loudness','popularity','speechiness'],
-                                        default=['acousticness', 'danceability', 'energy'])
+                                        default=['acousticness', 'danceability', 'energy','instrumentalness', 'valence', 'tempo'])
 
             st.markdown("***Specify the customized song features:***")
             start_year, end_year = st.slider(
