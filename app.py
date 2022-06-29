@@ -12,6 +12,9 @@ import streamlit.components.v1 as components
 #Create Streamlit app page
 st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random", initial_sidebar_state="expanded")
 
+#Create sidebar
+st.sidebar.titel("Navigation")
+
 # Create API client.
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"]
