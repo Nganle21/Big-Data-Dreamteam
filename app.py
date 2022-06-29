@@ -84,19 +84,23 @@ def page():
             st.markdown("***Specify relevant features in this dropdown box:***")
             options = st.multiselect('Relevant features:', options=['acousticness', 'danceability', 'energy','instrumentalness','valence','tempo','liveness','loudness','popularity','speechiness'],
                                         default=['acousticness', 'danceability', 'energy','instrumentalness', 'valence', 'tempo'])
+            test_feat=[]
 
             if "acousticness" in options:
                             acousticness = st.slider(
                             'Acousticness',
                             0.0, 1.0, 0.4)
+                            test_feat.append(acousticness)
             if "danceability" in options:
                             danceability = st.slider(
                                 'Danceability',
                                 0.0, 1.0, 0.7)
+                            test_feat.append(danceability)
             if "energy" in options:
                             energy = st.slider(
                                 'Energy',
                                 0.0, 1.0, 0.5)
+                            test_feat.append(energy)
             if "instrumentalness" in options:
                             instrumentalness = st.slider(
                                 'Instrumentalness',
@@ -128,10 +132,7 @@ def page():
             
 
     tracks_per_page = 6
-    test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
-        #test_feat = []
-    #for i in options:
-    #    test_feat.append(i)
+    #test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
     st.write(test_feat)
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
 
