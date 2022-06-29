@@ -132,6 +132,7 @@ def page():
     test_feat = []
     for i in options:
         test_feat.append(i)
+    st.write(test_feat)
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
 
     tracks = []
