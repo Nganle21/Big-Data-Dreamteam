@@ -23,7 +23,7 @@ client = storage.Client(credentials=credentials)
 @st.experimental_memo(ttl=600)
 def read_file(bucket_name, file_path):
     bucket = client.bucket(bucket_name)
-    content = bucket.blob(file_path).download_as_string().decode("utf-8")
+    content = bucket.blob(file_path).download_to_file("test.csv")
     return content
 
 bucket_name = "big-data-lyrician"
@@ -31,8 +31,6 @@ file_path = "filtered_track_df.csv"
 
 content = read_file(bucket_name, file_path)
 
-temp = pd.read_csv('gcs://big-data-lyrician/filtered_track_df.csv', encoding='utf-8')
-st.write(temp.head())
 
 @st.cache(allow_output_mutation=True)
 def load_data():
