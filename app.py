@@ -18,8 +18,8 @@ def read_file(bucket_name, file_path):
     content = bucket.blob(file_path).download_as_string().decode("utf-8")
     return content
 
-bucket_name = “big-data-lyrician”
-file_path = “filtered_track_df.csv”
+bucket_name = "big-data-lyrician"
+file_path = "filtered_track_df.csv"
 
 content = read_file(bucket_name, file_path)
 
