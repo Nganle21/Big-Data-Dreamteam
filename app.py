@@ -10,6 +10,7 @@ from sklearn.neighbors import NearestNeighbors
 import plotly.express as px
 import streamlit.components.v1 as components
 from tensorflow import keras
+import tensorflow as tf
 
 #Create Streamlit app page
 st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random", initial_sidebar_state="expanded")
