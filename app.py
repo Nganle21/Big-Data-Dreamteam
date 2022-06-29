@@ -9,6 +9,7 @@ credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"]
 )
 client = storage.Client(credentials=credentials)
+st.write(client)
 
 # Retrieve file contents.
 # Uses st.experimental_memo to only rerun when the query changes or after 10 min.
@@ -31,7 +32,7 @@ client = storage.Client(credentials=credentials)
 
 #Create Streamlit app page
 st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random",
-initial_sidebar_state="collapsed")
+initial_sidebar_state="expanded")
 
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
