@@ -30,7 +30,8 @@ bucket_name = "big-data-lyrician"
 file_path = "filtered_track_df.csv"
 
 content = read_file(bucket_name, file_path)
-content.to_csv("test.csv")
+with open("file.csv","w") as file:
+    file.write(content + "\n")
 
 @st.cache(allow_output_mutation=True)
 def load_data():
