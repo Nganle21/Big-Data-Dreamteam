@@ -103,3 +103,4 @@ streamlit
 plotly
 sklearn
 fsspec
+gcsfs
