@@ -76,7 +76,8 @@ def page():
                 genre_names, index=genre_names.index("Hip Hop"))
         with col1:
             st.markdown("***Specify relevant features in this dropdown box:***")
-            st.multiselect('Relevant features', ['acousticness', 'danceability', 'energy','instrumentalness','valence','tempo','liveness','loudness','popularity','speechiness'])
+            options = st.multiselect('Relevant features', ['acousticness', 'danceability', 'energy','instrumentalness','valence','tempo','liveness','loudness','popularity','speechiness'])
+            st.write(options)
 
 
             st.markdown("***Specify the customized song features:***")
