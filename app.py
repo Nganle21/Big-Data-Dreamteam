@@ -181,7 +181,7 @@ def page():
                         )
                         with st.expander("See more details"):
                             df = pd.DataFrame(dict(
-                            r=audio[:5],
+                            r=audio,
                             theta=audio_feats))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
                             fig.update_layout(height=400, width=340)
@@ -195,7 +195,7 @@ def page():
                         )
                         with st.expander("See more details"):
                             df = pd.DataFrame(dict(
-                                r=audio[:5],
+                                r=audio,
                                 theta=audio_feats))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
                             fig.update_layout(height=400, width=340)
