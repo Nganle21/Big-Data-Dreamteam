@@ -209,7 +209,10 @@ def page():
 #page()
 
 def lyr_gen():
-
+    text = open('./Lyrics_txt/text_electronic.txt', 'rb').read().decode(encoding='utf-8')
+    vocab = sorted(set(text))
+    char2idx = {u:i for i, u in enumerate(vocab)}
+    idx2char = np.array(vocab)
     def generate_text(model, start_string,t):
     # Evaluation step (generating text using the learned model)
 
