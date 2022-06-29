@@ -3,13 +3,14 @@ import streamlit as st
 #connect to Google Could Storage
 from google.oauth2 import service_account
 from google.cloud import storage
+
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 import plotly.express as px
 import streamlit.components.v1 as components
 
 #Create Streamlit app page
-st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random", initial_sidebar_state="expanded")
 
 # Create API client.
 credentials = service_account.Credentials.from_service_account_info(
@@ -32,7 +33,8 @@ content = read_file(bucket_name, file_path)
 
 @st.cache(allow_output_mutation=True)
 def load_data():
-    df = pd.read_csv("filtered_track_df.csv")
+    #df = pd.read_csv("filtered_track_df.csv")
+    df = pd.read_csv('gs://big-data-lyrician/filtered_track_df.csv')
     df['genres'] = df.genres.apply(lambda x: [i[1:-1] for i in str(x)[1:-1].split(", ")])
     exploded_track_df = df.explode("genres")
     return exploded_track_df
