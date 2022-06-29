@@ -34,7 +34,9 @@ content = read_file(bucket_name, file_path)
 @st.cache(allow_output_mutation=True)
 def load_data():
     #df = pd.read_csv("filtered_track_df.csv")
-    df = pd.read_csv('gs://big-data-lyrician/filtered_track_df.csv')
+    from tensorflow.python.lib.io import file_io
+    with file_io.FileIO('gs://"big-data-lyrician"/filtered_track_df.csv', 'r') as f:
+        df = pd.read_csv(f)
     df['genres'] = df.genres.apply(lambda x: [i[1:-1] for i in str(x)[1:-1].split(", ")])
     exploded_track_df = df.explode("genres")
     return exploded_track_df
