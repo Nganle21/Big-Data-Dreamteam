@@ -130,8 +130,6 @@ def page():
     for i in options:
         audio_feats.append(i)
 
-    st.write(audio_feats)
-
     def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
         genre = genre.lower()
         genre_data = exploded_track_df[(exploded_track_df["genres"]==genre) & (exploded_track_df["release_year"]>=start_year) & (exploded_track_df["release_year"]<=end_year)]
@@ -184,7 +182,7 @@ def page():
                         with st.expander("See more details"):
                             df = pd.DataFrame(dict(
                             r=audio[:5],
-                            theta=audio_feats[:5]))
+                            theta=audio_feats[]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
                             fig.update_layout(height=400, width=340)
                             st.plotly_chart(fig)
@@ -198,7 +196,7 @@ def page():
                         with st.expander("See more details"):
                             df = pd.DataFrame(dict(
                                 r=audio[:5],
-                                theta=audio_feats[:5]))
+                                theta=audio_feats[]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
                             fig.update_layout(height=400, width=340)
                             st.plotly_chart(fig)
