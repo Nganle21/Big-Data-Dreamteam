@@ -164,8 +164,8 @@ def page():
         st.session_state['start_track_i'] = 0
     
     with st.container():
-        col1, col2, col3 = st.columns([2,1,2])
-        if st.button("Recommend More Songs"):
+        col1, col2, col3, col4, col5 = st.columns([0.5,2,0.5,2,0.5])
+        if st.button("Show More Songs"):
             if st.session_state['start_track_i'] < len(tracks):
                 st.session_state['start_track_i'] += tracks_per_page
 
@@ -174,7 +174,7 @@ def page():
         if st.session_state['start_track_i'] < len(tracks):
             for i, (track, audio) in enumerate(zip(current_tracks, current_audios)):
                 if i%2==0:
-                    with col1:
+                    with col2:
                         components.html(
                             track,
                             height=400,
@@ -188,7 +188,7 @@ def page():
                             st.plotly_chart(fig)
             
                 else:
-                    with col3:
+                    with col4:
                         components.html(
                             track,
                             height=400,
@@ -202,6 +202,6 @@ def page():
                             st.plotly_chart(fig)
 
         else:
-            st.write("No songs left to recommend")
+            st.write("No songs left to show")
 
 page()
