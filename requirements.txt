@@ -102,4 +102,3 @@ zipp==3.8.0; python_version >= '3.7'
 streamlit
 plotly
 sklearn
-tensorflow
