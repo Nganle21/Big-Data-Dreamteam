@@ -257,7 +257,7 @@ def lyr_gen():
 
 
     a = keras.models.load_model("./Trained_models/electronic_model.h5")
-    st.text(generate_text(a, start_string=input,t=temp))
+    st.text(generate_text(a, start_string=input,t=0.3))
 
 
 
