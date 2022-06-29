@@ -32,7 +32,7 @@ st.write('test')
 
 #Create Streamlit app page
 st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random",
-initial_sidebar_state="expanded")
+initial_sidebar_state="collapsed")
 
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
