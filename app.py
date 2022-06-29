@@ -3,6 +3,13 @@ import streamlit as st
 #connect to Google Could Storage
 from google.oauth2 import service_account
 from google.cloud import storage
+import pandas as pd
+from sklearn.neighbors import NearestNeighbors
+import plotly.express as px
+import streamlit.components.v1 as components
+
+#Create Streamlit app page
+st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random", initial_sidebar_state="collapsed")
 
 # Create API client.
 credentials = service_account.Credentials.from_service_account_info(
@@ -22,15 +29,6 @@ bucket_name = "big-data-lyrician"
 file_path = "filtered_track_df.csv"
 
 content = read_file(bucket_name, file_path)
-
-
-#Create Streamlit app page
-st.set_page_config(page_title="Lyrician", layout="wide",page_icon= "random", initial_sidebar_state="collapsed")
-
-import pandas as pd
-from sklearn.neighbors import NearestNeighbors
-import plotly.express as px
-import streamlit.components.v1 as components
 
 @st.cache(allow_output_mutation=True)
 def load_data():
