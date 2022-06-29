@@ -91,6 +91,7 @@ def page():
                             instrumentalness = st.slider(
                                 'Instrumentalness',
                                 0.0, 1.0, 0.4)
+                            test_feat.append(instrumentalness)
             if "valence" in options:
                             valence = st.slider(
                                 'Valence',
