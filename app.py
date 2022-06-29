@@ -39,7 +39,7 @@ def load_data():
 
     data = pd.read_csv(DATA_URL)
     return data 
-data = load_data(10)
+data = load_data()
 #
 
 @st.cache(allow_output_mutation=True)
