@@ -253,7 +253,7 @@ def lyr_gen():
         return (start_string + ''.join(text_generated))
 
     input = st.text_input("I would love my lyric to start with:","i just want")
-    temp = st.number_input("... with the temperature:",0.3)
+    temp = st.number_input("... with the temperature:", min_value = 0.1, max_value =1.0, value=0.3,step=0.01)
 
 
     a = keras.models.load_model("./Trained_models/electronic_model.h5")
