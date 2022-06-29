@@ -205,7 +205,7 @@ def page():
         else:
             st.write("No songs left to show")
 
-page()
+#page()
 
 def lyr_gen():
     progress_bar = st.sidebar.progress(0)
@@ -235,4 +235,4 @@ nav = st.sidebar.radio('Pages', options = ["Song features","Lyric generation"])
 if nav == "Song features":
     page()
 elif nav == "Lyric generation":
-    lyc_gen()
+    lyr_gen()
