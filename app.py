@@ -77,8 +77,6 @@ def page():
         with col1:
             st.markdown("***Specify relevant features in this dropdown box:***")
             options = st.multiselect('Relevant features:', ['acousticness', 'danceability', 'energy','instrumentalness','valence','tempo','liveness','loudness','popularity','speechiness'])
-            st.write(options)
-
 
             st.markdown("***Specify the customized song features:***")
             start_year, end_year = st.slider(
@@ -89,22 +87,43 @@ def page():
                             acousticness = st.slider(
                             'Acousticness',
                             0.0, 1.0, 0.4)
-
-            danceability = st.slider(
-                'Danceability',
-                0.0, 1.0, 0.7)
-            energy = st.slider(
-                'Energy',
-                0.0, 1.0, 0.5)
-            instrumentalness = st.slider(
-                'Instrumentalness',
-                0.0, 1.0, 0.4)
-            valence = st.slider(
-                'Valence',
-                0.0, 1.0, 0.45)
-            tempo = st.slider(
-                'Tempo',
-                0.0, 244.04, 118.0)
+            if "danceability" in options:
+                            danceability = st.slider(
+                                'Danceability',
+                                0.0, 1.0, 0.7)
+            if "energy" in options:
+                            energy = st.slider(
+                                'Energy',
+                                0.0, 1.0, 0.5)
+            if "instrumentalness" in options:
+                            instrumentalness = st.slider(
+                                'Instrumentalness',
+                                0.0, 1.0, 0.4)
+            if "valence" in options:
+                            valence = st.slider(
+                                'Valence',
+                                0.0, 1.0, 0.45)
+            if "tempo" in options:
+                            tempo = st.slider(
+                                'Tempo',
+                                0.0, 244.04, 118.0)
+            if "liveness" in options:
+                            liveness = st.slider(
+                                'Liveness',
+                                0.0, 244.04, 118.0)
+            if "loudness" in options:
+                            loudness = st.slider(
+                                'Loudness',
+                                0.0, 244.04, 118.0)
+            if "popularity" in options:
+                            popularity = st.slider(
+                                'Popularity',
+                                0.0, 244.04, 118.0)
+            if "speechiness" in options:
+                            speechiness = st.slider(
+                                'Speechiness',
+                                0.0, 244.04, 118.0)
+            
 
     tracks_per_page = 6
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
