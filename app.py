@@ -254,7 +254,7 @@ def lyr_gen():
 
     
     a = keras.models.load_model("./Trained_models/electronic_model.h5")
-    st.write(generate_text(a, start_string=u"i just called to say",t=0.3))
+    st.text(generate_text(a, start_string=u"i just called to say",t=0.3))
 
 
 
