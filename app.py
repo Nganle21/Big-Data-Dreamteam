@@ -50,7 +50,7 @@ def page():
     st.title(title)
     st.header('Song Recommendation & Lyric Generation Engine')
 
-    st.write("Welcome to our webapp which helps musicians choose out different inspirations based on the song features. Also, we helps generate fun lyrics with our AI model! :)")
+    st.write("Welcome to our webapp which helps musicians choose out different inspirations, based on the song features. Also, we helps generate fun lyrics with our AI model! :)")
     st.markdown("##")
 
     with st.container():
