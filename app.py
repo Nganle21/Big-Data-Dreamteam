@@ -53,7 +53,7 @@ def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
     neigh = NearestNeighbors()
     neigh.fit(genre_data[audio_feats].to_numpy())
 
-    n_neighbors = neigh.kneighbors([test_feat], n_neighbors=len(genre_data), return_distance=False)[0]
+    n_neighbors = neigh.kneighbors([test_feat], n_neighbors=len(test_feat), return_distance=False)[0]
 
     uris = genre_data.iloc[n_neighbors]["uri"].tolist()
     audios = genre_data.iloc[n_neighbors][audio_feats].to_numpy()
