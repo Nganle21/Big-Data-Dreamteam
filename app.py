@@ -256,14 +256,6 @@ def lyr_gen():
     a = keras.models.load_model("./Trained_models/electronic_model.h5")
     st.write(generate_text(a, start_string=u"i just called to say",t=0.3))
 
-    def My_song(song):
-        img = Image.open("../input/image-for-notebook/Pink and White Geometric Marketing Presentation (1).png")
-        Text_on_image = ImageDraw.Draw(img)
-        myFont = ImageFont.truetype("../input/font-style/DancingScript-VariableFont_wght.ttf", 45)
-        Text_on_image.text((620,90), song, font=myFont, fill =(255, 255, 255))
-        return img    
-    #Having a look at the first 500 charachters of a random song lyrics
-    My_song(data.Lyrics[42][:500])
 
 
 #Create sidebar
