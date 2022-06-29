@@ -105,7 +105,7 @@ def page():
             if "liveness" in options:
                             liveness = st.slider(
                                 'Liveness',
-                                0.0, 1, 0.4)
+                                0.0, 0.4, 1)
                             test_feat.append(liveness)
             if "loudness" in options:
                             loudness = st.slider(
