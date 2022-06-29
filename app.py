@@ -164,7 +164,7 @@ def page():
         st.session_state['start_track_i'] = 0
     
     with st.container():
-        col1, col2, col3, col4, col5 = st.columns([0.5,2,0.5,2,0.5])
+        col1, col2, col3, col4, col5 = st.columns([0.25,2,0.5,2,0.25])
         if st.button("Show More Songs"):
             if st.session_state['start_track_i'] < len(tracks):
                 st.session_state['start_track_i'] += tracks_per_page
