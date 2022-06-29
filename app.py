@@ -95,26 +95,32 @@ def page():
                             valence = st.slider(
                                 'Valence',
                                 0.0, 1.0, 0.45)
+                            test_feat.append(valence)
             if "tempo" in options:
                             tempo = st.slider(
                                 'Tempo',
                                 0.0, 244.04, 118.0)
+                            test_feat.append(tempo)
             if "liveness" in options:
                             liveness = st.slider(
                                 'Liveness',
                                 0.0, 1, 0.4)
+                            test_feat.append(liveness)
             if "loudness" in options:
                             loudness = st.slider(
                                 'Loudness',
                                 -60.0, -30.0, -0.33)
+                            test_feat.append(loudness)
             if "popularity" in options:
                             popularity = st.slider(
                                 'Popularity',
                                 0.0, 97.0, 48.0)
+                            test_feat.append(popularity)
             if "speechiness" in options:
                             speechiness = st.slider(
                                 'Speechiness',
                                 0.0, 0.941, 0.44)
+                            test_feat.append(speechiness)
             
 
     tracks_per_page = 6
