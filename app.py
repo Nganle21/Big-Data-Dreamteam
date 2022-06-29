@@ -9,7 +9,7 @@ credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"]
 )
 client = storage.Client(credentials=credentials)
-st.write(client)
+st.write('test')
 
 # Retrieve file contents.
 # Uses st.experimental_memo to only rerun when the query changes or after 10 min.
