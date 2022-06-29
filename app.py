@@ -30,10 +30,11 @@ bucket_name = "big-data-lyrician"
 file_path = "filtered_track_df.csv"
 
 content = read_file(bucket_name, file_path)
-st.write(content)
+
 @st.cache(allow_output_mutation=True)
 def load_data():
-    df = pd.read_csv("filtered_track_df.csv")
+    #df = pd.read_csv("filtered_track_df.csv")
+    df = content
     df['genres'] = df.genres.apply(lambda x: [i[1:-1] for i in str(x)[1:-1].split(", ")])
     exploded_track_df = df.explode("genres")
     return exploded_track_df
