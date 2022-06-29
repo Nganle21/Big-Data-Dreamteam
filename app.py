@@ -45,20 +45,6 @@ genre_names = ['Dance Pop', 'Electronic', 'Electropop', 'Hip Hop', 'Jazz', 'K-po
 
 exploded_track_df = load_data()
 
-def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
-    genre = genre.lower()
-    genre_data = exploded_track_df[(exploded_track_df["genres"]==genre) & (exploded_track_df["release_year"]>=start_year) & (exploded_track_df["release_year"]<=end_year)]
-    genre_data = genre_data.sort_values(by='popularity', ascending=False)[:500]
-
-    neigh = NearestNeighbors()
-    neigh.fit(genre_data[audio_feats].to_numpy())
-
-    n_neighbors = neigh.kneighbors([test_feat], n_neighbors=len(test_feat), return_distance=False)[0]
-
-    uris = genre_data.iloc[n_neighbors]["uri"].tolist()
-    audios = genre_data.iloc[n_neighbors][audio_feats].to_numpy()
-    return uris, audios
-
 def page():
     title = "Lyrician"
     st.title(title)
@@ -135,6 +121,21 @@ def page():
     #test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
     audio_feats = test_feat
     st.write(test_feat)
+
+    def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
+        genre = genre.lower()
+        genre_data = exploded_track_df[(exploded_track_df["genres"]==genre) & (exploded_track_df["release_year"]>=start_year) & (exploded_track_df["release_year"]<=end_year)]
+        genre_data = genre_data.sort_values(by='popularity', ascending=False)[:500]
+
+        neigh = NearestNeighbors()
+        neigh.fit(genre_data[audio_feats].to_numpy())
+
+        n_neighbors = neigh.kneighbors([test_feat], n_neighbors=len(audio_feats), return_distance=False)[0]
+
+        uris = genre_data.iloc[n_neighbors]["uri"].tolist()
+        audios = genre_data.iloc[n_neighbors][audio_feats].to_numpy()
+        return uris, audios
+
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
 
     tracks = []
