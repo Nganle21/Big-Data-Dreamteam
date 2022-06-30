@@ -230,9 +230,10 @@ def lyr_gen():
                 genre_names, index=genre_names.index("Hip Hop"))
             genre_lower = genre.lower()
         with col1:
+
             link_text = './Lyrics_txt/text_'+genre_lower+'.txt'
             link_model = './Trained_models/'+genre_lower+'_model.h5'
-            st.write(link_text)
+
             text = open(link_text, 'rb').read().decode(encoding='utf-8')
             vocab = sorted(set(text))
             char2idx = {u:i for i, u in enumerate(vocab)}
@@ -280,7 +281,8 @@ def lyr_gen():
 
             a = keras.models.load_model(link_model)
             st.text(generate_text(a, start_string=input,t=temp))
-
+            if st.button("Shuffle"):
+                st.empty()
 
 
 #Create sidebar
