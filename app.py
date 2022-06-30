@@ -74,7 +74,7 @@ def page():
 
             st.markdown("***Specify relevant features in this dropdown box:***")
             options = st.multiselect('Relevant features:', options=['acousticness', 'danceability', 'energy','instrumentalness','valence','tempo','liveness','loudness','popularity','speechiness'],
-                                        default=['acousticness', 'danceability', 'energy','instrumentalness', 'valence', 'tempo'])
+                                        default=['acousticness', 'danceability', 'energy','instrumentalness', 'valence'])
 
             st.markdown("***Specify the customized song features:***")        
             test_feat=[]
@@ -171,44 +171,45 @@ def page():
     
     with st.container():
         col1, col2, col3, col4, col5 = st.columns([0.25,2,0.5,2,0.25])
-        if st.button("Show More Songs"):
-            if st.session_state['start_track_i'] < len(tracks):
-                st.session_state['start_track_i'] += tracks_per_page
+        with col3:
+            if st.button("Show More Songs"):
+                if st.session_state['start_track_i'] < len(tracks):
+                    st.session_state['start_track_i'] += tracks_per_page
 
-        current_tracks = tracks[st.session_state['start_track_i']: st.session_state['start_track_i'] + tracks_per_page]
-        current_audios = audios[st.session_state['start_track_i']: st.session_state['start_track_i'] + tracks_per_page]
-        if st.session_state['start_track_i'] < len(tracks):
-            for i, (track, audio) in enumerate(zip(current_tracks, current_audios)):
-                if i%2==0:
-                    with col2:
-                        components.html(
-                            track,
-                            height=400,
-                        )
-                        with st.expander("Feature radar charts"):
-                            df = pd.DataFrame(dict(
-                            r=audio,
-                            theta=audio_feats))
-                            fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=340)
-                            st.plotly_chart(fig)
-            
-                else:
-                    with col4:
-                        components.html(
-                            track,
-                            height=400,
-                        )
-                        with st.expander("Feature radar charts"):
-                            df = pd.DataFrame(dict(
+            current_tracks = tracks[st.session_state['start_track_i']: st.session_state['start_track_i'] + tracks_per_page]
+            current_audios = audios[st.session_state['start_track_i']: st.session_state['start_track_i'] + tracks_per_page]
+            if st.session_state['start_track_i'] < len(tracks):
+                for i, (track, audio) in enumerate(zip(current_tracks, current_audios)):
+                    if i%2==0:
+                        with col2:
+                            components.html(
+                                track,
+                                height=400,
+                            )
+                            with st.expander("Feature radar chart"):
+                                df = pd.DataFrame(dict(
                                 r=audio,
                                 theta=audio_feats))
-                            fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=340)
-                            st.plotly_chart(fig)
+                                fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+                                fig.update_layout(height=400, width=340)
+                                st.plotly_chart(fig)
+                
+                    else:
+                        with col4:
+                            components.html(
+                                track,
+                                height=400,
+                            )
+                            with st.expander("Feature radar chart"):
+                                df = pd.DataFrame(dict(
+                                    r=audio,
+                                    theta=audio_feats))
+                                fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+                                fig.update_layout(height=400, width=340)
+                                st.plotly_chart(fig)
 
-        else:
-            st.write("No songs left to show")
+            else:
+                st.write("No songs left to show")
 
 #page()
 
