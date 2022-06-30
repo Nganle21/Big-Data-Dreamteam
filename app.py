@@ -228,8 +228,10 @@ def lyr_gen():
             genre = st.radio(
                 "",
                 genre_names, index=genre_names.index("Hip Hop"))
-            
+            genre_lower = genre.lower()
+            st.write(genre_lower)
         with col1:
+            link_text = './Lyrics_txt/text_electronic.txt'
             text = open('./Lyrics_txt/text_electronic.txt', 'rb').read().decode(encoding='utf-8')
             vocab = sorted(set(text))
             char2idx = {u:i for i, u in enumerate(vocab)}
