@@ -228,55 +228,55 @@ def lyr_gen():
             genre = st.radio(
                 "",
                 genre_names, index=genre_names.index("Hip Hop"))
-    st.write(genre)
+            
+        with col1:
+            text = open('./Lyrics_txt/text_electronic.txt', 'rb').read().decode(encoding='utf-8')
+            vocab = sorted(set(text))
+            char2idx = {u:i for i, u in enumerate(vocab)}
+            idx2char = np.array(vocab)
+            def generate_text(model, start_string,t):
+            # Evaluation step (generating text using the learned model)
 
-    text = open('./Lyrics_txt/text_electronic.txt', 'rb').read().decode(encoding='utf-8')
-    vocab = sorted(set(text))
-    char2idx = {u:i for i, u in enumerate(vocab)}
-    idx2char = np.array(vocab)
-    def generate_text(model, start_string,t):
-    # Evaluation step (generating text using the learned model)
+                # Number of characters to generate
+                num_generate = 500
 
-        # Number of characters to generate
-        num_generate = 500
+                # Converting our start string to numbers (vectorizing)
+                input_eval = [char2idx[s] for s in start_string]
+                input_eval = tf.expand_dims(input_eval, 0)
 
-        # Converting our start string to numbers (vectorizing)
-        input_eval = [char2idx[s] for s in start_string]
-        input_eval = tf.expand_dims(input_eval, 0)
+                # Empty string to store our results
+                text_generated = []
 
-        # Empty string to store our results
-        text_generated = []
+                # Low temperature results in more predictable text.
+                # Higher temperature results in more surprising text.
+                # Experiment to find the best setting.
+                temperature = t
 
-        # Low temperature results in more predictable text.
-        # Higher temperature results in more surprising text.
-        # Experiment to find the best setting.
-        temperature = t
+                # Here batch size == 1
+                model.reset_states()
+                for i in range(num_generate):
+                    predictions = model(input_eval)
+                    # remove the batch dimension
+                    predictions = tf.squeeze(predictions, 0)
 
-        # Here batch size == 1
-        model.reset_states()
-        for i in range(num_generate):
-            predictions = model(input_eval)
-            # remove the batch dimension
-            predictions = tf.squeeze(predictions, 0)
+                    # using a categorical distribution to predict the character returned by the model
+                    predictions = predictions / temperature
+                    predicted_id = tf.random.categorical(predictions, num_samples=1)[-1,0].numpy()
 
-            # using a categorical distribution to predict the character returned by the model
-            predictions = predictions / temperature
-            predicted_id = tf.random.categorical(predictions, num_samples=1)[-1,0].numpy()
+                    # Pass the predicted character as the next input to the model
+                    # along with the previous hidden state
+                    input_eval = tf.expand_dims([predicted_id], 0)
 
-            # Pass the predicted character as the next input to the model
-            # along with the previous hidden state
-            input_eval = tf.expand_dims([predicted_id], 0)
+                    text_generated.append(idx2char[predicted_id])
 
-            text_generated.append(idx2char[predicted_id])
+                return (start_string + ''.join(text_generated))
 
-        return (start_string + ''.join(text_generated))
-
-    input = st.text_input("I would love my lyric to start with:","i just want")
-    temp = st.number_input("... with the temperature:", min_value = 0.1, max_value =1.0, value=0.3,step=0.01)
+            input = st.text_input("I would love my lyric to start with:","i just want")
+            temp = st.number_input("... with the temperature:", min_value = 0.1, max_value =1.0, value=0.3,step=0.01)
 
 
-    a = keras.models.load_model("./Trained_models/electronic_model.h5")
-    st.text(generate_text(a, start_string=input,t=temp))
+            a = keras.models.load_model("./Trained_models/electronic_model.h5")
+            st.text(generate_text(a, start_string=input,t=temp))
 
 
 
