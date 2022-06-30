@@ -277,12 +277,12 @@ def lyr_gen():
 
             input = st.text_input("I would love my lyric to start with:","i just want")
             temp = st.number_input("... with the temperature:", min_value = 0.1, max_value =1.0, value=0.3,step=0.01)
-            st.write("A hint for you:")
-            st.write("Low temperature results in more predictable text.")
-            st.write("Higher temperature results in more surprising text.")
-            st.write("Let's experiment to find your best setting.")
+            st.write("A hint for you: Low temperature results in more predictable text. Higher temperature results in more surprising text. Let's experiment to find your best setting.")
+            st.markdown("##")
+            st.markdown("##")
 
-
+            st.caption("Your result:")
+            st.markdown('##') 
             a = keras.models.load_model(link_model)
             st.text(generate_text(a, start_string=input,t=temp))
             if st.button("Shuffle"):
