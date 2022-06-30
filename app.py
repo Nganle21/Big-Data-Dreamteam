@@ -55,6 +55,8 @@ def page():
 
     st.write("Welcome to our webapp which helps musicians choose out different inspirations, based on the song features. Also, we helps generate fun lyrics with our AI model! :)")
     st.markdown("##")
+    st.subheader("Let's start with the song features.")
+
 
     with st.container():
         col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
@@ -211,6 +213,23 @@ def page():
 #page()
 
 def lyr_gen():
+    title = "Lyrician"
+    st.title(title)
+    st.header('Song Recommendation & Lyric Generation Engine')
+
+    st.write("Welcome to our webapp which helps musicians choose out different inspirations, based on the song features. Also, we helps generate fun lyrics with our AI model! :)")
+    st.markdown("##")
+    st.subheader("Now let's generate some lyrics with our AI model!")
+
+    with st.container():
+        col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
+        with col3:
+            st.markdown("***Specify the genre:***")
+            genre = st.radio(
+                "",
+                genre_names, index=genre_names.index("Hip Hop"))
+    st.write(genre)
+
     text = open('./Lyrics_txt/text_electronic.txt', 'rb').read().decode(encoding='utf-8')
     vocab = sorted(set(text))
     char2idx = {u:i for i, u in enumerate(vocab)}
