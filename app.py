@@ -231,8 +231,9 @@ def lyr_gen():
             genre_lower = genre.lower()
         with col1:
             link_text = './Lyrics_txt/text_'+genre_lower+'.txt'
+            link_model = './Trained_models/'+genre_lower+'_model.h5'
             st.write(link_text)
-            text = open('./Lyrics_txt/text_electronic.txt', 'rb').read().decode(encoding='utf-8')
+            text = open(link_text, 'rb').read().decode(encoding='utf-8')
             vocab = sorted(set(text))
             char2idx = {u:i for i, u in enumerate(vocab)}
             idx2char = np.array(vocab)
@@ -277,7 +278,7 @@ def lyr_gen():
             temp = st.number_input("... with the temperature:", min_value = 0.1, max_value =1.0, value=0.3,step=0.01)
 
 
-            a = keras.models.load_model("./Trained_models/electronic_model.h5")
+            a = keras.models.load_model(link_model)
             st.text(generate_text(a, start_string=input,t=temp))
 
 
