@@ -275,7 +275,7 @@ def lyr_gen():
 
                 return (start_string + ''.join(text_generated))
 
-            input = st.text_input("I would love my lyric to start with:","i just want")
+            input = st.text_input("I would love my lyric to start with (only small letters accepted):","i just want")
             temp = st.number_input("... with the temperature:", min_value = 0.1, max_value =1.0, value=0.3,step=0.01)
             st.write("A hint for you: Low temperature results in more predictable text. Higher temperature results in more surprising text. Let's experiment to find your best setting.")
             st.markdown("##")
